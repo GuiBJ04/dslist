@@ -28,4 +28,9 @@ public class GameService {
         Game result = gameRepository.findById(id).get();
        return new GameDTO(result);
     }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId) {
+        return gameRepository.searchByList(listId).stream().map(x -> new GameMinDTO(x)).toList();
+    }
 }
